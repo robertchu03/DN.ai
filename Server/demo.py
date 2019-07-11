@@ -21,10 +21,10 @@ from keras.models import model_from_json
 ###################
 app = flask.Flask(__name__)
 
-app.secret_key = "bacon"
+app.secret_key = 'SECRET KEY'  # PROVIDE YOUR SECRET KEY
 
 # login credential database
-users = {'robert': 'hehehaha', 'hazis': 'hehehaha'}
+users = {'SOME USER NAME #1': 'SOME PASSWORD #1', 'SOME USER NAME #2': 'SOME PASSWORD #2'}  # PROVIDE LOGIN CREDENTIALS, ADD MORE IF NECESSARY
 
 # Login page definition
 class Main(flask.views.MethodView):
@@ -122,13 +122,12 @@ model.load_weights("music_genre_classifier_weights.h5")
 # Create a list of absolute paths for all music tracks
 assert (sys.platform == 'darwin' or sys.platform == 'win32'), "Unsuitable OS used!!"
 # MacOS
-if sys.platform == 'darwin': 
-    source = Path('/Users/robertchu/Music/iTunes/iTunes Media/Music')
-    file_extension = "**/*.m4a"
-# Windows
-else:
-    source = Path(r'C:\Users\Robert\Music\iTunes\iTunes Media\Music')
-    file_extension = "**\*.m4a"
+if sys.platform == 'darwin':  # MacOS
+    source = Path('[ROOT PATH TO YOUR OWN MUSIC LIBRARY]')  # <--- UPDATE THIS LINE B4 USING!!
+    file_extension = "**/*.m4a"   # <--- UPDATE THIS LINE WITH THE RIGHT FILE EXTENSION B4 USING!!
+else:  # Windows
+    source = Path('[ROOT PATH TO YOUR OWN MUSIC LIBRARY]')  # <--- UPDATE THIS LINE B4 USING!!
+    file_extension = "**\*.m4a"   # <--- UPDATE THIS LINE WITH THE RIGHT FILE EXTENSION B4 USING!!
 
 song_path = [file for file in source.glob(file_extension)]
 
@@ -258,7 +257,7 @@ def create_library(parent_folder, song_loc, genres):
     -- <NULL>
     """
     i = 0
-    files = [x for x in parent_folder.glob('**/*.m4a')]  # list of all music files in library, if exists
+    files = [x for x in parent_folder.glob('**/*.m4a')]  # UPDATE FILE EXTENSION IF NECESSARY
 
     # Only copy files when the library is empty or not up-to-date
     if len(song_loc) != len(files):
@@ -399,6 +398,4 @@ def min_dest_distance():
     return jsonify({'host_ip': host_ip, 'mean_dist': mean_dist})
 
 
-app.debug = True
-#app.run()
 app.run(host='0.0.0.0', port=5001)
