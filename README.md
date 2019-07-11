@@ -9,7 +9,7 @@ This project demonstrates the use of deep learning to classify music by genres a
 
 First of all, we trained the genre classifier model with the [GTZAN Genre Collection](http://marsyas.info/downloads/datasets.html). This dataset consists of 1000 audio tracks with 100 songs from each of the 10 genres -- blues, classical, country, disco, hiphop, jazz, metal, pop, reggae and rock. Using an open source library, [LibROSA](https://librosa.github.io/librosa/), we extracted the following 26 features from each track with a known genre and passed the features and labels of all 1000 songs to a 5-layer Artificial Neural Network (*Fig 1*), created using [Keras](https://keras.io/) and [scikit-learn](https://scikit-learn.org/stable/index.html) libraries, for training.
 
-![GitHub Logo](/Images/genre classifier structure.png)
+![GitHub Logo](Images/genre classifier structure.png)
 *Fig 1: Genre classifier ANN model structure*
 
 ##### 26 Features of Audio Track:
