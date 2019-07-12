@@ -385,7 +385,7 @@ def min_dest_distance():
         dist[i] = dist.get(i, euclidean(v, vec))
         
     # Sort dict by distance in ascending order
-    dist_sorted = dict(sorted(dist.items(), key=lambda kv:(kv[1], kv[0])))
+    dist_sorted = dict(sorted(dist.items(), key=lambda kv: kv[1]))
 
     # Save sorted dict as a pickle file to be used later for music recommendation
     pickle.dump(dist_sorted, open("dist_sorted.pkl", "wb"))
