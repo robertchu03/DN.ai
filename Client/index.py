@@ -18,9 +18,10 @@ app = Flask(__name__)
 mybot = ChatBot('Hawkeye')
 trainer = ChatterBotCorpusTrainer(mybot)
 
-# Define corpus path for chatbot training
-assert (sys.platform == 'darwin' or sys.platform == 'win32'), "Unsuitable OS used!!"
+# Assume MacOS or Windows are used
+assert (sys.platform == 'darwin' or sys.platform == 'win32'), "Unsuitable OS used. Pls use either MacOS or Windows instead"
 
+# Define corpus path for chatbot training
 if sys.platform == 'darwin':  # MacOS
     corpus_path = './chatterbot_corpus/data/english'
 else:  # Windows
@@ -47,11 +48,11 @@ else:  # Windows
 
 song_path = [file for file in source.glob(file_extension)]
 
-# Reload feature vectors of all songs in the client's local library 
+# Reload feature vectors for all the songs in the client's local library 
 my_library = Path("../Server/vec_library.npy")
 X = np.load(my_library, allow_pickle=True)
 
-# Reload classifed genres for all songs in the client's local library
+# Reload classified genres for all the songs in the client's local library
 my_genres = Path("../Server/genres.npy")
 genres = np.load(my_genres, allow_pickle=True)
 
@@ -166,7 +167,7 @@ message = []
 @app.route("/get")
 def get_bot_response():
 
-    # Save chatbot input to a list
+    # Save chatbot input to a list, allowing decisions to be made by chatbot based on diff stages of user input
     message.append((request.args.get('reply')).lower())
     userText = message[-1].lower()
 
@@ -225,46 +226,15 @@ def get_bot_response():
                 return "No suitable tracks available from peers"
 
         except UnboundLocalError:
-            pass  # Ignore this error as the value of g, v or machine may not be determined yet
+            pass  # Ignore this error as the value of g, v or machine may not exist
 
         return str(mybot.get_response(userText))
-
-    elif 'weather' in userText:
-        city = 'Hong Kong'
-        owm = OWM(API_key='fe94f78a27ffe459b1762a56dbe8c02e')
-        obs = owm.weather_at_place(city)
-        w = obs.get_weather()
-        k = w.get_detailed_status()
-        x = w.get_temperature(unit='celsius')
-        
-        # Clean up the message list
-        del message[:]
-
-        return ('It is now %0.0f°C. The max temp is %0.0f°C and the mini temp is %0.0f°C. \
-            There will be %s.' % (x['temp'], x['temp_max'], x['temp_min'], k))    
     
-    elif 'current news' in userText:
-        news_url="https://news.google.com/news/rss"
-        news = uReq(news_url)
-        xml_page = news.read()
-        news.close()
-        # (MacOS only) Install lxml parser first for the following to work [pip install lxml] 
-        soup_page = soup(xml_page,"xml")
-        news_list = soup_page.findAll("item")
-
-        headlines = ''
-
-        for i in range(15):
-            headlines += f"[{i+1}] {news_list[i].title.text}.\n"
-        
-        # Clean up the message list
-        del message[:]
-
-        return headlines
-
     else:
         # Clean up the message list
         del message[:]
+        
+        # Produce chatbot response to any request other than playing music
         return str(mybot.get_response(userText))
 
 
