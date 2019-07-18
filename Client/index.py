@@ -3,9 +3,7 @@ from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer, ChatterBotCorpusTrainer
 import webbrowser
 import os
-from pyowm import OWM
-from bs4 import BeautifulSoup as soup
-from urllib.request import urlopen as uReq
+
 from pathlib import Path
 import numpy as np
 import pickle
