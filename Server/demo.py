@@ -77,7 +77,7 @@ class Music(flask.views.MethodView):
 
         # Populate lib_songs with relative paths of songs from the music library
         for s in abs_songs:
-            assert (sys.platform == 'darwin' or sys.platform == 'win32'), "Unsuitable OS used!!"
+            assert (sys.platform == 'darwin' or sys.platform == 'win32'), "Unsuitable OS used. Pls use either MacOS or Windows instead"
             # MacOS
             if sys.platform == 'darwin':
                 song = str(s).split('/')[-1]  # extract file name from full path (original location)
@@ -189,7 +189,7 @@ def feature_extraction(song_path, scaler):
 # generated from the local music library. The file may exist. 
 my_library = Path("vec_library.npy")
 
-# If the feature array doesnt exist or isnt up-to-date, create this array (time-consuming)
+# If the feature array doesnt exist or isnt up-to-date, create this array (maybe time-consuming)
 if not (my_library.is_file() and len(np.load(my_library, allow_pickle=True))==len(song_path)):
     X = feature_extraction(song_path, standardizer)
     np.save(my_library, X)
