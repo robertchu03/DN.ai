@@ -21,7 +21,7 @@ First of all, we trained the genre classifier model with the [GTZAN Genre Collec
 * Root mean square error
 * Spectral roll-off frequency
 
-The dataset of 1000 audio clips resulted in 65% test accuracy.  By reducing each audio clip from 30 to 5 secs, we generated 6 times more examples for training and improved the test accuracy to 88%! (See [Training of Music Genre Classifier Notebook](/Training%20of%20Music%20Genre%20Classifier.ipynb) for details)
+The dataset of 1000 audio tracks resulted in 65% test accuracy.  By reducing each audio clip from 30 to 5 secs, we generated 6 times more examples for training and improved the test accuracy to 88%! (See [Training of Music Genre Classifier Notebook](/Training%20of%20Music%20Genre%20Classifier.ipynb) for details)
 
 The trained model was then distributed to all participating computers for 'predicting' genres of their own music collections.
 
