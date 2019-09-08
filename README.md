@@ -21,6 +21,8 @@ First of all, we trained the genre classifier model with the [GTZAN Genre Collec
 * Root mean square error
 * Spectral roll-off frequency
 
+The dataset of 1000 audio clips resulted in 65% test accuracy.  By reducing each audio clip from 30 to 5 secs, we generated 6 times more examples for training and improved the test accuracy to 88%! (See [Training of Music Genre Classifier Notebook](/Training%20of%20Music%20Genre%20Classifier.ipynb) for details)
+
 The trained model was then distributed to all participating computers for 'predicting' genres of their own music collections.
 
 We built a chatbot from a Python library, [ChatterBot](https://chatterbot.readthedocs.io/en/stable/index.html), and the chatbot web interface (*Fig 2*) and the music streaming server from [Flask](http://flask.pocoo.org/docs/1.0/). The chatbot was trained with a corpus of customised dialogue data to facilitate its interactions with a user. We also implemented other logics to improve its understanding of certain keywords so that it can start communicating with music streaming servers whenever a user requests for music recommendations.
